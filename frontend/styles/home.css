@@ -17,7 +17,7 @@ body {
 }
 
 .loginButton:hover {
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(58, 59, 59);
 }
 
 .registerButton {
@@ -34,7 +34,7 @@ body {
 }
 
 .registerButton:hover {
-    background-color: rgb(50, 50, 50);
+    background-color: rgb(58, 59, 59);
 }
 
 .container {
