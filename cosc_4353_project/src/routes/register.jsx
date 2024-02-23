@@ -12,7 +12,7 @@ export default function Register(){
                 <label htmlFor="reg-username">Username:</label>
                 <input
                 type="text"
-                id="reg-username"
+                id="re-username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 /><br/>
