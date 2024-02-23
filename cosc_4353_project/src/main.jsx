@@ -8,6 +8,7 @@ import "./index.css";
 import Root from './routes/root';
 import Register from './routes/register';
 import Profile from './routes/profile'
+import ProfilePage from './routes/profile_page';
 import ErrorPage from './error';
 import Login from './routes/login';
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />
+  },
+  {
+    path: "/profile_page",
+    element: <ProfilePage />
   },
   {
     path: "/fuel-form",
