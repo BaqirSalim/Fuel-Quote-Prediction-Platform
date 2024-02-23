@@ -7,7 +7,9 @@ import {
 import "./index.css";
 import Root from './routes/root';
 import Register from './routes/register';
+import Profile from './routes/profile'
 import ErrorPage from './error';
+import Login from './routes/login';
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Hello</div>
+    element: <Login />
   },
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/profile",
+    element: <Profile />
   },
   {
     path: "/fuel-form",
