@@ -1,10 +1,12 @@
+import React from 'react';
+import '../styles/root.css'; // Import the CSS file from the 'styles' folder
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Login from './login';
+
 export default function Root() {
 
     return (
-        <div className="container">
-        <h1>Welcome to the Home Page</h1>
-        <a href="/login"><button className="loginButton">Login</button></a>
-        <a href="/register"><button className="registerButton">Register</button></a>
-    </div>
+        < Login />
     );
-  }
+}

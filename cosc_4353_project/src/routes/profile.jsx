@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
     const [fullName, setFullName] = useState('');
@@ -8,10 +9,27 @@ export default function Profile() {
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
 
+
+    const [error, setError] = useState('')
+    const navigate = useNavigate()
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        if(fullName == '' || address1 == '' || city == '' || state == '' || zipcode == '')
+        {
+            setError("One or more profile fields are empty")
+        }
+        else
+        {
+            navigate('/profile_page')
+        }
+    }
+
+
     return (
         <div>
-            <h2>Client Profile Management</h2>
-            <form>
+            <h2>Client Profile Information</h2>
+            <form onSubmit={handleUpdate}>
                 <div>
                     <label htmlFor="full_name"><strong>Full Name</strong></label><br />
                     <input
@@ -48,6 +66,7 @@ export default function Profile() {
                         value={address2}
                         onChange={(e) => setAddress2(e.target.value)}
                         maxLength={100}
+                        optional
                     />
                 </div>
                 <div>
@@ -73,8 +92,57 @@ export default function Profile() {
                         required
                     >
                         <option value="">Select State</option>
-                        {/* Add state options here */}
-                    </select>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                </select>
                 </div>
                 <div>
                     <label htmlFor="zipcode"><strong>Zipcode</strong></label><br />
@@ -90,7 +158,7 @@ export default function Profile() {
                         required
                     />
                 </div>
-                <button type="submit">Update Profile</button>
+                <button>Update Profile</button>
             </form>
         </div>
     );

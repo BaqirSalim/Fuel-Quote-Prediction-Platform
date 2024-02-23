@@ -21,7 +21,7 @@ export default function Register(){
             navigate('/login')
         }
     }
-
+    
     return (
         <div>
             <h2>Client Registration</h2>
