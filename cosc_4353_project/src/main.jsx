@@ -7,8 +7,10 @@ import {
 import "./index.css";
 import Root from './routes/root';
 import Register from './routes/register';
-import Profile from './routes/profile'
+import ProfileForm from './routes/profile_form'
 import ProfilePage from './routes/profile_page';
+import FuelForm from './routes/fuel_form';
+import FuelHistory from './routes/fuel_history';
 import ErrorPage from './error';
 import Login from './routes/login';
 
@@ -27,20 +29,20 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/profile",
-    element: <Profile />
+    path: "/profile_form",
+    element: <ProfileForm />
   },
   {
     path: "/profile_page",
     element: <ProfilePage />
   },
   {
-    path: "/fuel-form",
-    element: <div>Fuel</div>
+    path: "/fuel_form",
+    element: <FuelForm />
   },
   {
-    path: "/fuel-history",
-    element: <div>History</div>
+    path: "/fuel_history",
+    element: <FuelHistory />
   }
 ]);
 

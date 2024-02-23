@@ -16,7 +16,7 @@ export default function Login(){
         }
         else
         {
-            navigate('/profile')
+            navigate('/profile_form')
         }
     }
     

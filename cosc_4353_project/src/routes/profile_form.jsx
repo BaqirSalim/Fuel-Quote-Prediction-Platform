@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Profile() {
+export default function ProfileForm() {
     const [fullName, setFullName] = useState('');
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
@@ -21,14 +21,23 @@ export default function Profile() {
         }
         else
         {
-            navigate('/profile_page')
+            navigate('/profile_page', {
+                state: {
+                    fullName,
+                    address1,
+                    address2,
+                    city,
+                    state,
+                    zipcode
+                }
+            });
         }
     }
 
-
+    
     return (
         <div>
-            <h2>Client Profile Information</h2>
+            <h2>Client Profile Form</h2>
             <form onSubmit={handleUpdate}>
                 <div>
                     <label htmlFor="full_name"><strong>Full Name</strong></label><br />
@@ -66,7 +75,6 @@ export default function Profile() {
                         value={address2}
                         onChange={(e) => setAddress2(e.target.value)}
                         maxLength={100}
-                        optional
                     />
                 </div>
                 <div>
