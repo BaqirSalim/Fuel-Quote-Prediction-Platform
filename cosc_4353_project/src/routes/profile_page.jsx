@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/authContext';
-
+import "../styles/profiledisplay.css"
 
 export default function ProfilePage() {
     const navigate = useNavigate();

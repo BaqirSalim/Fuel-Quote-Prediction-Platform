@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import "../styles/profileedit.css"
 
 export default function ProfileForm() {
     const [fullName, setFullName] = useState('');
@@ -40,61 +41,65 @@ export default function ProfileForm() {
 
     
     return (
-        <div>
+        <div className="profile-container">
             <h2>Client Profile Form</h2>
             <form onSubmit={handleUpdate}>
-                <div>
-                    <label htmlFor="full_name"><strong>Full Name</strong></label><br />
-                    <input
-                        type="text"
-                        id="full_name"
-                        name="full_name"
-                        placeholder="Enter Full Name"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        maxLength={50}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="address1"><strong>Address 1</strong></label><br />
-                    <input
-                        type="text"
-                        id="address1"
-                        name="address1"
-                        placeholder="Enter Address 1"
-                        value={address1}
-                        onChange={(e) => setAddress1(e.target.value)}
-                        maxLength={100}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="address2"><strong>Address 2</strong></label><br />
-                    <input
-                        type="text"
-                        id="address2"
-                        name="address2"
-                        placeholder="Enter Address 2 (Optional)"
-                        value={address2}
-                        onChange={(e) => setAddress2(e.target.value)}
-                        maxLength={100}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="city"><strong>City</strong></label><br />
-                    <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        placeholder="Enter City"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        maxLength={100}
-                        required
-                    />
-                </div>
-                <div>
+            <div className="input-container">
+            <label htmlFor="full_name"><strong>Full Name</strong></label><br />
+            <input
+                type="text"
+                id="full_name"
+                name="full_name"
+                placeholder="Enter Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                maxLength={50}
+                required
+                
+            />
+        </div>
+        <div className="input-container">
+            <label htmlFor="address1"><strong>Address 1</strong></label><br />
+            <input
+                type="text"
+                id="address1"
+                name="address1"
+                placeholder="Enter Address 1"
+                value={address1}
+                onChange={(e) => setAddress1(e.target.value)}
+                maxLength={100}
+                required
+                
+            />
+        </div>
+        <div className="input-container">
+            <label htmlFor="address2"><strong>Address 2 (Optional)</strong></label><br />
+            <input
+                type="text"
+                id="address2"
+                name="address2"
+                placeholder="Enter Address 2"
+                value={address2}
+                onChange={(e) => setAddress2(e.target.value)}
+                maxLength={100}
+                
+            />
+        </div>
+        <div className="input-container">
+            <label htmlFor="city"><strong>City</strong></label><br />
+            <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                maxLength={100}
+                required
+               
+            />
+        </div>
+        <div className="input-container">
                     <label htmlFor="state"><strong>State</strong></label><br />
                     <select
                         id="state"
@@ -102,6 +107,8 @@ export default function ProfileForm() {
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         required
+                        
+
                     >
                         <option value="">Select State</option>
                         <option value="AL">Alabama</option>
@@ -155,22 +162,23 @@ export default function ProfileForm() {
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                 </select>
-                </div>
-                <div>
-                    <label htmlFor="zipcode"><strong>Zipcode</strong></label><br />
-                    <input
-                        type="text"
-                        id="zipcode"
-                        name="zipcode"
-                        placeholder="Enter Zipcode"
-                        value={zipcode}
-                        onChange={(e) => setZipcode(e.target.value)}
-                        minLength={5}
-                        maxLength={9}
-                        required
-                    />
-                </div>
-                <button>Update Profile</button>
+        </div>
+        <div className="input-container">
+            <label htmlFor="zipcode"><strong>Zipcode</strong></label><br />
+            <input
+                type="text"
+                id="zipcode"
+                name="zipcode"
+                placeholder="Enter Zipcode"
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value)}
+                minLength={5}
+                maxLength={9}
+                required
+                
+            />
+        </div>
+            <button className="update-button">Update Profile</button>
             </form>
         </div>
     );
