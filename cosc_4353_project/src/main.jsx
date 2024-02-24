@@ -14,8 +14,6 @@ import FuelHistory from './routes/fuel_history';
 import ErrorPage from './error';
 import Login from './routes/login';
 import { AuthProvider } from './context/authContext';
-import FuelForm from './routes/fuel_form';
-import FuelHistory from './routes/fuel_history';
 
 const router = createBrowserRouter([
   {

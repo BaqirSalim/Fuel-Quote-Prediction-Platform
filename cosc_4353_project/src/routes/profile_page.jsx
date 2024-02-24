@@ -10,12 +10,6 @@ export default function ProfilePage() {
         navigate('/fuel_form');
     };
 
-    const navigate = useNavigate();
-
-    const navFuelForm = () => {
-        navigate('/fuel_form');
-    };
-
     const navFuelHistory = () => {
         navigate('/fuel_history');
     };
