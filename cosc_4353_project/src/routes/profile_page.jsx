@@ -1,9 +1,15 @@
-import React from 'react';
-import { useLocation } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../context/authContext';
 
 
 export default function ProfilePage() {
+    const navigate = useNavigate();
+
+    const navFuelForm = () => {
+        navigate('/fuel_form');
+    };
+
     const navigate = useNavigate();
 
     const navFuelForm = () => {
@@ -14,31 +20,34 @@ export default function ProfilePage() {
         navigate('/fuel_history');
     };
 
-    const location = useLocation();
-    const { fullName, address1, address2, city, state, zipcode } = location.state;
+    const {getUser} = useAuth()
+
+    const user = getUser()
+    console.log(user)
 
     return (
         <div>
-            <h2>Client Profile Information</h2>
-            <div>
-                <p><strong>Full Name:</strong> {fullName}</p>
-                <p><strong>Address 1:</strong> {address1}</p>
-                <p><strong>Address 2:</strong> {address2}</p>
-                <p><strong>City:</strong> {city}</p>
-                <p><strong>State:</strong> {state}</p>
-                <p><strong>Zipcode:</strong> {zipcode}</p>
-            </div>
-
+            {
+                user ?
+                <div> 
+                    <p>{"User Name: " + user["username"]}</p>
+                    <p>{"Full Name: " + user["fullName"]}</p>
+                    <p>{"Address 1: " + user["address1"]}</p>
+                    {user["address2"] ? <p>{"Address 2: " + user["address2"]}</p> : <></>}
+                    <p>{"City: " + user["city"]}</p>
+                    <p>{"State: " + user["state"]}</p>
+                    <p>{"Zipcode: " + user["zipcode"]}</p>
+                </div>
+                : "Profile Not Set Up"
+            }
 
             <button onClick={navFuelForm}>Fuel Quote Form</button>
 
             <h2></h2>
             <button onClick={navFuelHistory}>Fuel History</button>
 
-
-
         </div>
-        
-        
     );
+
+
 }

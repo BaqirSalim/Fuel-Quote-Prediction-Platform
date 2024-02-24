@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 export default function ProfileForm() {
     const [fullName, setFullName] = useState('');
@@ -12,6 +13,7 @@ export default function ProfileForm() {
 
     const [error, setError] = useState('')
     const navigate = useNavigate()
+    const {updateUser} = useAuth()
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -21,16 +23,18 @@ export default function ProfileForm() {
         }
         else
         {
-            navigate('/profile_page', {
-                state: {
-                    fullName,
-                    address1,
-                    address2,
-                    city,
-                    state,
-                    zipcode
-                }
-            });
+            const data = {
+                fullName: fullName,
+                address1: address1,
+                address2: address2,
+                city: city,
+                state: state,
+                zipcode: zipcode,
+                orders: []
+            }
+            
+            updateUser(data)
+            navigate('/profile_page')
         }
     }
 

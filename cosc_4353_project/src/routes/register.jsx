@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../hooks/useLogin";
+import { useAuth } from "../context/authContext";
 
 export default function Register(){
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const {register} = useAuth();
+    const [nameInput, setNameInput] = useState('')
+    const [passInput, setPassInput] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
-    const {logins, addLogin} = useLogin();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(username == '' || password == '')
+        if(nameInput == '' || passInput == '')
         {
             setError("Username or Password empty")
         }
         else
         {
-            addLogin({username: username, password: password})
+            register({ username: nameInput, password: passInput })
+            setNameInput('')
+            setPassInput('')
             navigate('/login')
         }
     }
@@ -25,20 +27,22 @@ export default function Register(){
     return (
         <div>
             <h2>Client Registration</h2>
+            {/* later we will change this onSubmit into an action, but that requires implementation on the backend
+            which we do not yet have */}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="reg-username">Username:</label>
                 <input
                 type="text"
                 id="reg-username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
                 /><br/>
                 <label htmlFor="reg-password">Password:</label>
                 <input
                 type="password"
                 id="reg-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={passInput}
+                onChange={(e) => setPassInput(e.target.value)}
                 /><br/>
                 <button>Register Here!</button>
             </form>
