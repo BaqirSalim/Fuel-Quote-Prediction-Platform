@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import useClientForm from "../hooks/useClientForm.js";
 import "../styles/profileedit.css"
 
 export default function ProfileForm() {
@@ -12,11 +13,13 @@ export default function ProfileForm() {
     const [zipcode, setZipcode] = useState('');
 
 
+    const { updateProfile } = useClientForm();
+
     const [error, setError] = useState('')
     const navigate = useNavigate()
     const {updateUser} = useAuth()
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
         if(fullName == '' || address1 == '' || city == '' || state == '' || zipcode == '')
         {
@@ -35,6 +38,7 @@ export default function ProfileForm() {
             }
             
             updateUser(data)
+            await updateProfile(data)
             navigate('/profile_page')
         }
     }
