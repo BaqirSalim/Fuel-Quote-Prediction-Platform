@@ -1,14 +1,22 @@
 export const clientProfile = async (req, res) => {
     try {
-        const { fullname, address1, city, state, zipcode, orders  } = req.body;
+        const { fullName, address1, address2, city, state, zipcode, orders  } = req.body; // destructures data from frontend
         
         
-        // ADD DATABASE SUBMITTING CODE HERE
+        // ADD DATABASE SUBMITTING CODE HERE, must use authUser given from after user logs in
 
         
 
 
-        
+        res.status(200).json({ // returns status data after POST request to profile update backend route
+            fullName,
+            address1,
+            address2,
+            city,
+            state,
+            zipcode,
+            orders,
+        });
 
 
 
