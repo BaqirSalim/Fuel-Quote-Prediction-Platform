@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/root.css"
 import { useAuth } from "../context/authContext";
+import axios from 'axios';
 
 export default function Login(){
     const [username, setUsername] = useState('')
@@ -10,19 +11,25 @@ export default function Login(){
     const navigate = useNavigate()
     const {login} = useAuth();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(username == '' || password == '')
-        {
-            setError("Username or Password empty")
-        }
-        else if(login(username, password))
-        {
-            navigate('/profile_form')
-        }
-        else
-        {
-            setError("Username or Password incorrect")
+        try {
+            const response = await axios.post('http://localhost:3000/user/login', {username, password});           
+            //should be backend validation
+            // if(username == '' || password == '')
+            // {
+            //     setError("Username or Password empty")
+            // }
+            if(response.status === 200)
+            {
+                navigate('/profile_form')
+            }
+            else
+            {
+                setError("Incorrect username or password")
+            }
+        } catch (error) {
+            // setError(error)
         }
     }
     
