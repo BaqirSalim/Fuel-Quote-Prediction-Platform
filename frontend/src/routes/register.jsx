@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import axios from "axios";
 
 export default function Register(){
     const {register} = useAuth();
@@ -9,7 +10,7 @@ export default function Register(){
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(nameInput == '' || passInput == '')
         {
@@ -21,6 +22,30 @@ export default function Register(){
             setNameInput('')
             setPassInput('')
             navigate('/login')
+        }
+
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:3000/user/register', {username:nameInput, password:passInput});           
+            //should be backend validation
+            // if(username == '' || password == '')
+            // {
+            //     setError("Username or Password empty")
+            // }
+            if(response.status === 200)
+            {
+                navigate('/login')
+            }
+            else if(response.status === 401)
+            {
+                setError("Username or password not long enough")
+            }
+            else
+            {
+                setError("Unknown error occurred")
+            }
+        } catch (error) {
+            // setError(error)
         }
     }
     
