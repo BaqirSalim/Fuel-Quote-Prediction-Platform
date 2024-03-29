@@ -24,12 +24,20 @@ export default function Login(){
             {
                 navigate('/profile_form')
             }
+        } catch (error) {
+            if(error.response.status === 402)
+            {
+                setError("Username or Password empty")
+            }
+            else if(error.response.status === 401)
+            {
+                setError("Username or Password incorrect")
+            }
             else
             {
-                setError("Incorrect username or password")
+                console.log(error.message)
+                setError("Unexpected error occurred")
             }
-        } catch (error) {
-            // setError(error)
         }
     }
     

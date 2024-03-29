@@ -8,20 +8,24 @@ class LoginController {
       (user) => user.username === username && user.password === password
     );
 
-    if (user) {
+    if (!username || !password) {
+      res.status(402).json({ error: "Username or Password is empty" });
+    } else if (user) {
       res.status(200).json({ message: "Login successful" });
     } else {
-      res
-        .status(401)
-        .json({ error: "Incorrect username or password " + username });
+      res.status(401).json({ error: "Incorrect username or password" });
     }
   }
 
   static register(req, res) {
     const { username, password } = req.body;
 
+    const user = users.find((user) => user.username === username);
+
     if (username.length == 0 || password.length == 0) {
       res.status(401).json({ error: "Username or password not long enough" });
+    } else if (user) {
+      res.status(402).json({ error: "Username not available" });
     } else {
       users.push({ username: username, password: password });
       res.status(200).json({ message: "Registration successful" });

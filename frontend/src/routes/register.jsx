@@ -11,18 +11,18 @@ export default function Register(){
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if(nameInput == '' || passInput == '')
-        {
-            setError("Username or Password empty")
-        }
-        else
-        {
-            register({ username: nameInput, password: passInput })
-            setNameInput('')
-            setPassInput('')
-            navigate('/login')
-        }
+        // e.preventDefault();
+        // if(nameInput == '' || passInput == '')
+        // {
+        //     setError("Username or Password empty")
+        // }
+        // else
+        // {
+        //     register({ username: nameInput, password: passInput })
+        //     setNameInput('')
+        //     setPassInput('')
+        //     navigate('/login')
+        // }
 
         e.preventDefault();
         try {
@@ -36,16 +36,20 @@ export default function Register(){
             {
                 navigate('/login')
             }
-            else if(response.status === 401)
+        } catch (error) {
+            if(error.response.status === 401)
             {
-                setError("Username or password not long enough")
+                setError("Username or Password not long enough")
+            }
+            else if(error.response.status === 402)
+            {
+                setError("Username not available")
             }
             else
             {
-                setError("Unknown error occurred")
+                console.log(error.message)
+                setError("An unexpected error occurred")
             }
-        } catch (error) {
-            // setError(error)
         }
     }
     
