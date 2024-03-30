@@ -1,5 +1,4 @@
-const users = [{ username: "baqir", password: "salim" }];
-
+import users from "../data/users";
 class LoginController {
   static login(req, res) {
     const { username, password } = req.body;
