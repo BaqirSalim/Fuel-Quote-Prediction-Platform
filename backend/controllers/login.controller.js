@@ -1,4 +1,4 @@
-import users from "../data/users";
+import users from "../data/users.js";
 class LoginController {
   static login(req, res) {
     const { username, password } = req.body;
