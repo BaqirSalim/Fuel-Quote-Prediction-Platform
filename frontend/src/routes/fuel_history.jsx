@@ -1,4 +1,6 @@
 import { useAuth } from "../context/authContext";
+import axios from 'axios';
+
 
 export default function FuelHistory() {
     const {getUser} = useAuth()

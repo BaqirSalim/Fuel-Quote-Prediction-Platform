@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import axios from 'axios';
+
+
 
 export default function FuelForm(){
     const {getUser, updateOrders} = useAuth(); //function to append to orders
