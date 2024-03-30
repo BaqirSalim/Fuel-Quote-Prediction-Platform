@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711772643420" clover="3.2.0">
-  <project timestamp="1711772643420" name="All files">
-    <metrics statements="28" coveredstatements="24" conditionals="20" coveredconditionals="20" methods="6" coveredmethods="6" elements="54" coveredelements="50" complexity="0" loc="28" ncloc="28" packages="1" files="2" classes="2"/>
-    <file name="fuel-quote.controller.js" path="C:\Users\akash\OneDrive - University Of Houston\Documents\COSC-4353-Project\backend\controllers\fuel-quote.controller.js">
-      <metrics statements="11" coveredstatements="7" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
-      <line num="4" count="2" type="stmt"/>
-      <line num="6" count="2" type="stmt"/>
-      <line num="9" count="2" type="cond" truecount="6" falsecount="0"/>
-      <line num="10" count="1" type="stmt"/>
-      <line num="19" count="1" type="stmt"/>
-      <line num="27" count="0" type="stmt"/>
-      <line num="28" count="0" type="stmt"/>
-      <line num="33" count="1" type="stmt"/>
-      <line num="37" count="1" type="stmt"/>
-      <line num="41" count="0" type="stmt"/>
-      <line num="42" count="0" type="stmt"/>
-    </file>
-    <file name="login.controller.js" path="C:\Users\akash\OneDrive - University Of Houston\Documents\COSC-4353-Project\backend\controllers\login.controller.js">
-      <metrics statements="17" coveredstatements="17" conditionals="14" coveredconditionals="14" methods="4" coveredmethods="4"/>
+<coverage generated="1711734004696" clover="3.2.0">
+  <project timestamp="1711734004696" name="All files">
+    <metrics statements="17" coveredstatements="9" conditionals="14" coveredconditionals="8" methods="4" coveredmethods="2" elements="35" coveredelements="19" complexity="0" loc="17" ncloc="17" packages="1" files="1" classes="1"/>
+    <file name="login.controller.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\controllers\login.controller.js">
+      <metrics statements="17" coveredstatements="9" conditionals="14" coveredconditionals="8" methods="4" coveredmethods="2"/>
       <line num="1" count="1" type="stmt"/>
       <line num="5" count="3" type="stmt"/>
       <line num="7" count="3" type="stmt"/>

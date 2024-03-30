@@ -1,5 +1,4 @@
-const users = [{ username: "baqir", password: "salim" }];
-
+import users from "../data/users.js";
 class LoginController {
   static login(req, res) {
     const { username, password } = req.body;
@@ -27,7 +26,17 @@ class LoginController {
     } else if (user) {
       res.status(402).json({ error: "Username not available" });
     } else {
-      users.push({ username: username, password: password });
+      users.push({
+        username: username,
+        password: password,
+        fullName: "",
+        address1: "",
+        address2: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        orders: [],
+      });
       res.status(200).json({ message: "Registration successful" });
     }
   }
