@@ -28,6 +28,7 @@ export default function ProfileForm() {
         else
         {
             const data = {
+                username: "Matthew",
                 fullName: fullName,
                 address1: address1,
                 address2: address2,
