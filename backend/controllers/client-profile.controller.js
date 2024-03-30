@@ -1,14 +1,14 @@
-import users from '../data/users.js'; // Import the users array
+import users from '../data/users.js'; 
 
 export const clientProfile = async (req, res) => {
     try {
-        const { username, fullName, address1, address2, city, state, zipcode, orders } = req.body; // Destructure data from frontend
+        const { username, fullName, address1, address2, city, state, zipcode, orders } = req.body; // destructures data from frontend
         
-        // Find the index of the current user in the users array
+        // finds the index of the current user in the users array
         const userIndex = users.findIndex(user => user.username === username);
 
         if (userIndex !== -1) {
-            // Update the user's data with the new profile information
+            // updates the user's data with the new profile information
             users[userIndex] = {
                 ...users[userIndex],
                 username,
