@@ -11,12 +11,15 @@ import fuelRoutes from "./routes/fuel-quote.routes.js"
 const app = express();
 const port = 3000;
 
+// sets up use for .env file variables
 dotenv.config();
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// app's middleware
 app.use(cors());
 app.use(express.json());
 app.use("/client", clientRoutes);
@@ -24,7 +27,7 @@ app.use("/user", loginRoutes);
 app.use("/fuelquote", fuelRoutes);
 
 
-
+// connects backend to MongoDB
 mongoose.connect(process.env.MONGO_DB_URI)
 .then(() => {
   console.log("Connected to database!");
