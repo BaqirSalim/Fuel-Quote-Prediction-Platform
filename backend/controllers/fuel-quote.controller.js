@@ -1,3 +1,4 @@
+import Quote from '../models/fuel-quote.model.js'
 
 class FuelQuoteController {
     static async submitFuelQuote(req, res) {
@@ -10,17 +11,14 @@ class FuelQuoteController {
                 return res.status(400).json({ error: "All fields are required" });
             }
 
-        
+            const fuelquote = await Quote.create(req.body);
 
 
             // Calculate the fuel rate and total cost based on the provided parameters here
 
             // Respond with status and data after submitting fuel quote
             res.status(200).json({
-                gallonsRequested,
-                deliveryAddress,
-                deliveryDate,
-                suggestedPrice,
+                fuelquote
                 //totalAmount  // Add calculated fuel rate and total cost here
             });
         } catch (error) {
