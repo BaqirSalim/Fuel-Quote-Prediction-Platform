@@ -30,10 +30,12 @@ class FuelQuoteController {
     static async getFuelQuoteHistory(req, res) {
         try {
 
-            //add username in query data for fuel quote maybe
+            
 
-            const fuelQuoteHistory = await FuelQuoteModel.find({username: username}); //might use username to query
+            const fuelQuoteHistory = await FuelQuoteModel.find({username: username}); //added in username to pull up every client's submission by username
     
+            
+
             res.status(200).json({
 
                 fuelQuoteHistory
