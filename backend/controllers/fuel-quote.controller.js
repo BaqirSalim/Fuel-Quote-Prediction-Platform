@@ -16,7 +16,7 @@ class FuelQuoteController {
 
             // Calculate the fuel rate and total cost based on the provided parameters here
 
-            // Respond with status and data after submitting fuel quote
+            
             res.status(200).json({
                 fuelquote
                 //totalAmount  // Add calculated fuel rate and total cost here
@@ -29,15 +29,23 @@ class FuelQuoteController {
 
     static async getFuelQuoteHistory(req, res) {
         try {
-            // Retrieve Fuel Quote history here
 
-            // Respond with status and fuel quote history data
+            //add username in query data for fuel quote maybe
+
+            const fuelQuoteHistory = await FuelQuoteModel.find({ }); //might use username to query
+    
             res.status(200).json({
-                // Add fuel quote history data here
+
+                fuelQuoteHistory
             });
+
+            
+
         } catch (error) {
+
             console.log("Error in fuel quote history controller", error.message)
             res.status(500).json({ error: "Internal Server Error" })
+
         }
     }
 }
