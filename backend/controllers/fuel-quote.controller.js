@@ -32,7 +32,7 @@ class FuelQuoteController {
 
             //add username in query data for fuel quote maybe
 
-            const fuelQuoteHistory = await FuelQuoteModel.find({ }); //might use username to query
+            const fuelQuoteHistory = await FuelQuoteModel.find({username: username}); //might use username to query
     
             res.status(200).json({
 
