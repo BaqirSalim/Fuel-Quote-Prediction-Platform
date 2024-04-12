@@ -1,4 +1,4 @@
-import Profile from '../models/client-profile.model.js'
+import ClientProfile from '../models/client-profile.model.js'
 
 class ClientController {
     static async clientProfile(req, res) {
@@ -10,7 +10,7 @@ class ClientController {
                 return res.status(400).json({ error: "One or more required fields is missing" });
             }
             
-            const profile = await Profile.create(req.body);
+            const profile = await ClientProfile.create(req.body);
 
             res.status(200).json({profile})
             

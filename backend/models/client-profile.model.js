@@ -14,13 +14,13 @@ const clientProfileSchema = new mongoose.Schema({
     address1: {
         type: String,
         required: true,
-        minlength: 10,
+        minlength: 0,
         maxlength: 100
     },
     address2: {
         type: String,
         required: false,
-        minlength: 10,
+        minlength: 0,
         maxlength: 100
     },
     city: {
