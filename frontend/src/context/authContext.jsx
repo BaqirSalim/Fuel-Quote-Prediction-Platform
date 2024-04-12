@@ -11,14 +11,24 @@
 //     orders: "string", ## recieved at fuel form page and displayed in fuel history page
 // }
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 
 const AuthContext = createContext();
 
 export function AuthProvider({children}) {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(() => {
+        const prevData = localStorage.getItem('currentUser');
+        return prevData ? JSON.parse(prevData) : null;
+    });
+
+    useEffect(() => {
+        if(currentUser != null)
+        {
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+      }, [currentUser]);
 
     const register = async (user, password) => {
         try {
@@ -57,6 +67,7 @@ export function AuthProvider({children}) {
 
             if(response.status === 200)
             {
+                console.log(userId)
                 return {success: true, message: "Login successful"}
             }
         } catch (error) {
@@ -85,40 +96,6 @@ export function AuthProvider({children}) {
     const getUser = () => {
         return currentUser;
     }
-
-    // const updateUser = (updatedData) => {
-    //     const updatedUsers = users.map((user) => {
-    //         if(user.username === currentUser.username)
-    //         {
-    //             return {...user, updatedData};
-    //         }
-    //         return user;
-    //     });
-    //     setUsers(updatedUsers);
-    //     setCurrentUser({...currentUser, ...updatedData})
-    // }
-
-    // const updateOrders = (newOrder) => {
-    //     const updatedUsers = users.map((user) => {
-    //         if(user.username === currentUser.username)
-    //         {
-    //             if("orders" in currentUser)
-    //             {
-    //                 const updatedUser = {...user, orders:[newOrder]}
-    //                 setCurrentUser(updatedUser)
-    //                 return updatedUser;
-    //             }
-    //             else
-    //             {
-    //                 const updatedUser = {...user, orders:[...user.orders, newOrder]}
-    //                 setCurrentUser(updatedUser)
-    //                 return updatedUser;
-    //             }                
-    //         }
-    //         return user;
-    //     });
-    //     setUsers(updatedUsers);
-    // }
 
     return (
         <AuthContext.Provider value={{currentUser, login, logout, register, getUser}}>

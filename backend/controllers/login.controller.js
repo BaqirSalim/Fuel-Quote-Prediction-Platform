@@ -14,7 +14,7 @@ class LoginController {
     } else if (user && user.comparePasswords(password)) {
       const session = setSessionUser(user);
       req.session.user = session;
-      req.send(session);
+      res.send(session);
     } else {
       console.log(username);
       res.status(401).json({ error: "Incorrect username or password" });
