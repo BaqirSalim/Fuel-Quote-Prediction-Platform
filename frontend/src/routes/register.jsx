@@ -25,32 +25,17 @@ export default function Register(){
         // }
 
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/user/register', {username:nameInput, password:passInput});           
-            //should be backend validation
-            // if(username == '' || password == '')
-            // {
-            //     setError("Username or Password empty")
-            // }
-            if(response.status === 200)
-            {
-                navigate('/login')
-            }
-        } catch (error) {
-            if(error.response.status === 401)
-            {
-                setError("Username or Password not long enough")
-            }
-            else if(error.response.status === 402)
-            {
-                setError("Username not available")
-            }
-            else
-            {
-                console.log(error.message)
-                setError("An unexpected error occurred")
-            }
+        const response = await register(nameInput, passInput)
+
+        if(response.success)
+        {
+            navigate('/login')
         }
+        else
+        {
+            setError(response.error)
+        }
+        
     }
     
     return (

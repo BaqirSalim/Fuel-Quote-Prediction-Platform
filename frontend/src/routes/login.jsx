@@ -13,31 +13,16 @@ export default function Login(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:3000/user/login', {username, password});           
-            //should be backend validation
-            // if(username == '' || password == '')
-            // {
-            //     setError("Username or Password empty")
-            // }
-            if(response.status === 200)
-            {
-                navigate('/profile_form')
-            }
-        } catch (error) {
-            if(error.response.status === 402)
-            {
-                setError("Username or Password empty")
-            }
-            else if(error.response.status === 401)
-            {
-                setError("Username or Password incorrect")
-            }
-            else
-            {
-                console.log(error.message)
-                setError("Unexpected error occurred")
-            }
+        e.preventDefault();
+        const response = await login(username, password)
+
+        if(response.success)
+        {
+            navigate('/profile_form')
+        }
+        else
+        {
+            setError(response.error)
         }
     }
     

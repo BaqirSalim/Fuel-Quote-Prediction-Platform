@@ -1,44 +1,66 @@
 import users from "../data/users.js";
+import User from "../models/user.model.js";
+import { setSessionUser } from "../util/helper.js";
+
+//part of this code is sourced from https://itnext.io/mastering-session-authentication-aa29096f6e22
 class LoginController {
-  static login(req, res) {
+  static async login(req, res) {
     const { username, password } = req.body;
 
-    const user = users.find(
-      (user) => user.username === username && user.password === password
-    );
+    const user = await User.findOne({ username });
 
     if (!username || !password) {
       res.status(402).json({ error: "Username or Password is empty" });
-    } else if (user) {
-      res.status(200).json({ message: "Login successful" });
+    } else if (user && user.comparePasswords(password)) {
+      const session = setSessionUser(user);
+      req.session.user = session;
+      req.send(session);
     } else {
+      console.log(username);
       res.status(401).json({ error: "Incorrect username or password" });
     }
   }
 
-  static register(req, res) {
+  static async register(req, res) {
     const { username, password } = req.body;
 
-    const user = users.find((user) => user.username === username);
-
-    if (username.length == 0 || password.length == 0) {
-      res.status(401).json({ error: "Username or password not long enough" });
-    } else if (user) {
-      res.status(402).json({ error: "Username not available" });
+    if (!username || !password) {
+      res.status(402).json({ error: "Username or Password is empty" });
     } else {
-      users.push({
-        username: username,
-        password: password,
-        fullName: "",
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-        zipcode: "",
-        orders: [],
-      });
-      res.status(200).json({ message: "Registration successful" });
+      try {
+        const user = new User({ username, password });
+        const session = setSessionUser(user);
+        await user.save();
+        req.session.user = session;
+        res.send(session);
+      } catch (err) {
+        res.status(401).json({ error: "Username not available" });
+      }
     }
+  }
+
+  static delete(req, res) {
+    try {
+      const { session } = req.body;
+      const user = session.user;
+      if (user) {
+        session.destroy((err) => {
+          if (err) throw err;
+          res.clearCookie(SESS_NAME);
+          res.send(user);
+        });
+      } else {
+        throw new Error("Unexpected Error occurred");
+      }
+    } catch (err) {
+      res
+        .status(422)
+        .send(JSON.stringify(err, Object.getOwnPropertyNames(err)));
+    }
+  }
+
+  static isLoggedIn({ session: { user } }, res) {
+    res.send({ user });
   }
 }
 
