@@ -16,7 +16,7 @@ describe("clientProfile", () => {
         address1: "123 unittest lane",
         address2: "",
         city: "university",
-        state: "texas",
+        state: "TX",
         zipcode: "12345",
         orders: [],
       },
@@ -34,7 +34,7 @@ describe("clientProfile", () => {
       address1: "123 unittest lane",
       address2: "",
       city: "university",
-      state: "texas",
+      state: "TX",
       zipcode: "12345",
       orders: [],
     };
@@ -68,6 +68,36 @@ describe("clientProfile", () => {
     expect(res.json).toBeCalledWith({
       error: "One or more required fields is missing",
     });
+  });
+
+  test("should return a 500 status code and error message if there is an internal server error", async () => {
+    const req = {
+      body: {
+        username: "matthewyohannes",
+        fullName: "Matthew",
+        address1: "123 unittest lane",
+        address2: "",
+        city: "university",
+        state: "TX",
+        zipcode: "12345",
+        orders: [],
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockError = new Error("Database connection failed");
+    const mockCreate = jest.spyOn(ClientProfile, "create");
+    mockCreate.mockRejectedValue(mockError);
+
+    await ClientController.clientProfile(req, res);
+
+    expect(res.status).toBeCalledWith(500);
+    expect(res.json).toBeCalledWith({ error: "Internal Server Error" });
+
+    mockCreate.mockRestore(); // Restore the mock after the test
   });
 
   // Restore the original Profile.create method after all tests
