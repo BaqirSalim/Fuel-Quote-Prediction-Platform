@@ -1,24 +1,53 @@
 import LoginController from "../controllers/login.controller";
+import User from "../models/user.model";
 import { jest, test, expect, describe } from "@jest/globals";
 
+const mockFindOne = jest.spyOn(User, "findOne");
+const mockCreate = jest.spyOn(User, "create");
+
 describe("login", () => {
-  test("valid credentials result in a valid login", () => {
+  test("session is assigned at valid login", async () => {
     const req = { body: { username: "baqir", password: "salim" } }; //this is a valid login
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      send: jest.fn(),
+    };
     //we are mocking status as it is assigned 200 upon successful login and we're mocking json as it is assigned the valid login message
 
-    LoginController.login(req, res);
+    const userMock = {
+      id: "1234567890",
+      username: "baqir",
+      comparePasswords: jest.fn(() => true),
+    };
 
-    expect(res.status).toBeCalledWith(200);
-    expect(res.json).toBeCalledWith({ message: "Login successful" });
+    mockFindOne.mockResolvedValue(userMock);
+
+    await LoginController.login(req, res);
+
+    //this is to test that when the login is valid, the session is being properly assigned
+    expect(res.send).toBeCalledWith({
+      userId: "1234567890",
+      username: "baqir",
+    });
   });
 
-  test("invalid credentials result in a 401 error", () => {
+  test("invalid credentials result in a 401 error", async () => {
     const req = { body: { username: "baqir", password: "sal" } }; //this is a valid login
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      send: jest.fn(),
+    };
     //we are mocking status as it is assigned 401 upon unsuccessful login and we're mocking json as it is assigned the invalid login message
 
-    LoginController.login(req, res);
+    const userMock = {
+      comparePasswords: jest.fn(() => false),
+    };
+
+    mockFindOne.mockResolvedValue(userMock);
+
+    await LoginController.login(req, res);
 
     expect(res.status).toBeCalledWith(401);
     expect(res.json).toBeCalledWith({
@@ -26,12 +55,18 @@ describe("login", () => {
     });
   });
 
-  test("Empty credentials result in a 402 error", () => {
+  test("Empty credentials result in a 402 error", async () => {
     const req = { body: { username: "", password: "" } }; //this is a valid login
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
     //we are mocking status as it is assigned 402 upon empty login and we're mocking json as it is assigned the empty login message
 
-    LoginController.login(req, res);
+    const userMock = {
+      comparePasswords: jest.fn(() => false),
+    };
+
+    mockFindOne.mockResolvedValue(userMock);
+
+    await LoginController.login(req, res);
 
     expect(res.status).toBeCalledWith(402);
     expect(res.json).toBeCalledWith({
@@ -41,47 +76,74 @@ describe("login", () => {
 });
 
 describe("register", () => {
-  test("Valid credentials result in a valid registration", () => {
+  test("Valid credentials result in a valid registration", async () => {
     const req = { body: { username: "akash", password: "nelson" } };
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      send: jest.fn(),
+    };
 
-    LoginController.register(req, res);
+    const userMock = {
+      id: "1234567890",
+      username: "baqir",
+      save: jest.fn(),
+    };
 
-    expect(res.status).toBeCalledWith(200);
-    expect(res.json).toBeCalledWith({ message: "Registration successful" });
+    mockCreate.mockResolvedValue(userMock);
+
+    await LoginController.register(req, res);
+
+    expect(res.send).toBeCalledWith({
+      userId: "1234567890",
+      username: "baqir",
+    });
   });
 
-  test("Duplicate username results in 402 error", () => {
+  test("Duplicate username results in 401 error", async () => {
     const req = { body: { username: "baqir", password: "sal" } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
-    LoginController.register(req, res);
+    const validationError = new Error("User validation failed");
+    validationError.name = "ValidationError";
+    validationError.errors = {
+      username: {
+        message: "Username already exists",
+        kind: "user defined",
+        path: "username",
+        value: "existingUsername",
+      },
+    };
 
-    expect(res.status).toBeCalledWith(402);
+    mockCreate.mockRejectedValue(validationError);
+
+    await LoginController.register(req, res);
+
+    expect(res.status).toBeCalledWith(401);
     expect(res.json).toBeCalledWith({ error: "Username not available" });
   });
 
-  test("Empty password results in a 401 error", () => {
+  test("Empty password results in a 402 error", () => {
     const req = { body: { username: "akash", password: "" } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
     LoginController.register(req, res);
 
-    expect(res.status).toBeCalledWith(401);
+    expect(res.status).toBeCalledWith(402);
     expect(res.json).toBeCalledWith({
-      error: "Username or password not long enough",
+      error: "Username or Password is empty",
     });
   });
 
-  test("Empty username results in a 401 error", () => {
+  test("Empty username results in a 402 error", () => {
     const req = { body: { username: "", password: "nelson" } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
     LoginController.register(req, res);
 
-    expect(res.status).toBeCalledWith(401);
+    expect(res.status).toBeCalledWith(402);
     expect(res.json).toBeCalledWith({
-      error: "Username or password not long enough",
+      error: "Username or Password is empty",
     });
   });
 });
