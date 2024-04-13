@@ -1,5 +1,3 @@
-
-// fuel-quote.model.js
 import mongoose from 'mongoose';
 
 const fuelQuoteSchema = new mongoose.Schema({

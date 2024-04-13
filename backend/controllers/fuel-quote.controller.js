@@ -1,4 +1,3 @@
-// fuel-quote.controller.js
 import FuelQuote from '../models/fuel-quote.model.js';
 
 class FuelQuoteController {

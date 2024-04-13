@@ -1,4 +1,3 @@
-// fuel-quote.controller.test.js
 import FuelQuoteController from "../controllers/fuel-quote.controller.js";
 import FuelQuote from "../models/fuel-quote.model.js";
 import { jest, test, expect, describe } from "@jest/globals";
@@ -53,6 +52,32 @@ describe("submitFuelQuote", () => {
         });
     });
 
+    test("should return a 500 status code and error message if there is an internal server error", async () => {
+        const req = {
+            body: {
+                gallonsRequested: 100,
+                deliveryAddress: "123 Main St",
+                deliveryDate: "2024-07-24",
+                suggestedPrice: 50
+            }
+        };
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        const mockError = new Error("Database connection failed");
+        const mockCreate = jest.spyOn(FuelQuote, "create");
+        mockCreate.mockRejectedValue(mockError);
+
+        await FuelQuoteController.submitFuelQuote(req, res);
+
+        expect(res.status).toBeCalledWith(500);
+        expect(res.json).toBeCalledWith({ error: "Internal Server Error" });
+
+        mockCreate.mockRestore(); // Restore the mock after the test
+    });
+
     afterAll(() => {
         mockCreate.mockRestore();
     });
@@ -74,7 +99,7 @@ describe("getFuelQuoteHistory", () => {
                 deliveryDate: "2024-07-24",
                 suggestedPrice: 50
             },
-            // Add more mock data as needed
+            //add more if i need to
         ];
 
         const mockFind = jest.spyOn(FuelQuote, "find");
@@ -86,7 +111,22 @@ describe("getFuelQuoteHistory", () => {
         expect(res.json).toBeCalledWith({ fuelQuoteHistory: mockFuelQuoteHistory });
     });
 
-    afterAll(() => {
-        mockFind.mockRestore();
+    test("should return a 500 status code and error message if there is an internal server error", async () => {
+        const req = {};
+        const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+        };
+
+        const mockError = new Error("Database connection failed");
+        const mockFind = jest.spyOn(FuelQuote, "find");
+        mockFind.mockRejectedValue(mockError);
+
+        await FuelQuoteController.getFuelQuoteHistory(req, res);
+
+        expect(res.status).toBeCalledWith(500);
+        expect(res.json).toBeCalledWith({ error: "Internal Server Error" });
+
+        mockFind.mockRestore(); // Restore the mock after the test
     });
 });
