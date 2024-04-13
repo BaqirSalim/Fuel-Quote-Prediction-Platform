@@ -23,6 +23,7 @@ export default function ProfilePage() {
         <div>
             {
                 user ?
+                    // Add functionality to be able to grab that specific user's data from the database
                 <div> 
                     <p>{"User Name: " + user["username"]}</p>
                     <p>{"Full Name: " + user["fullName"]}</p>

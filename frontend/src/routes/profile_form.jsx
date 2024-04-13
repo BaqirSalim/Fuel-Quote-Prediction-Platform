@@ -13,38 +13,43 @@ export default function ProfileForm() {
   const [zipcode, setZipcode] = useState("");
 
   const { updateProfile } = useClientForm();
+  const { getUser } = useAuth();
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { updateUser } = useAuth();
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (
-      fullName == "" ||
-      address1 == "" ||
-      city == "" ||
-      state == "" ||
-      zipcode == ""
-    ) {
+    if (!fullName || !address1 || !city || !state || !zipcode) {
       setError("One or more profile fields are empty");
     } else {
-      const data = {
-        username: "Matthew",
-        fullName: fullName,
-        address1: address1,
-        address2: address2,
-        city: city,
-        state: state,
-        zipcode: zipcode,
-        orders: [],
-      };
-
-      updateUser(data);
-      await updateProfile(data);
-      navigate("/profile_page");
+      const currentUser = getUser(); // Invoke getUser to get the current user
+      if (currentUser) {
+        const data = {
+          username: currentUser.username,
+          fullName: fullName,
+          address1: address1,
+          address2: address2,
+          city: city,
+          state: state,
+          zipcode: zipcode,
+          orders: [], // THIS WILL PROBABLY RESET ORDERS TO BE EMPTY ARRAY, ADD FUNCTIONALITY TO ONLY UPDATE ORDERS???
+        };
+        
+        try {
+          
+          await updateProfile(data);
+          console.log("sent to update profile")
+          navigate("/profile_page");
+        } catch (error) {
+          setError("Failed to update profile. Please try again.");
+        }
+      } else {
+        setError("User not found. Please log in again.");
+      }
     }
   };
+  
 
   return (
     <div className="profile-container">
