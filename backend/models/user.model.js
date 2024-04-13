@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: (username) => User.doesNotExist({ username }),
-        message: "username already exists",
+        validator: (username) => User.duplicates({ username }),
+        message: "Username already exists",
       },
     },
     password: {
@@ -27,8 +27,8 @@ UserSchema.pre("save", function () {
   }
 });
 
-UserSchema.statics.doesNotExist = async function (field) {
-  return (await this.where(field).countDocuments()) === 0;
+UserSchema.statics.duplicates = async function (properties) {
+  return (await this.where(properties).countDocuments()) === 0;
 };
 
 UserSchema.methods.comparePasswords = function (password) {

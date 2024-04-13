@@ -1,8 +1,6 @@
 import LoginController from "../controllers/login.controller";
 import { jest, test, expect, describe } from "@jest/globals";
 
-
-
 describe("login", () => {
   test("valid credentials result in a valid login", () => {
     const req = { body: { username: "baqir", password: "salim" } }; //this is a valid login
