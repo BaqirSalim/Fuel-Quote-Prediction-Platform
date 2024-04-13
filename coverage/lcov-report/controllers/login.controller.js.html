@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -135,34 +135,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,30 +204,30 @@ class LoginController {
 &nbsp;
     const user = await User.findOne({ username });
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!username || !password) {
-<span class="cstat-no" title="statement not covered" >      res.status(402).json({ error: "Username or Password is empty" });</span>
+    if (!username || !password) {
+      res.status(402).json({ error: "Username or Password is empty" });
     } else if (user &amp;&amp; user.comparePasswords(password)) {
       const session = setSessionUser(user);
       res.send(session);
-    } else <span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >      console.log(username);</span>
-<span class="cstat-no" title="statement not covered" >      res.status(401).json({ error: "Incorrect username or password" });</span>
+    } else {
+      res.status(401).json({ error: "Incorrect username or password" });
     }
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  st</span>atic async register(req, res) {
-    const { username, password } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+  static async register(req, res) {
+    const { username, password } = req.body;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!username || !password) {</span>
-<span class="cstat-no" title="statement not covered" >      res.status(402).json({ error: "Username or Password is empty" });</span>
+    if (!username || !password) {
+      res.status(402).json({ error: "Username or Password is empty" });
     } else {
-<span class="cstat-no" title="statement not covered" >      try {</span>
-        const user = <span class="cstat-no" title="statement not covered" >new User({ username, password });</span>
-        const session = <span class="cstat-no" title="statement not covered" >setSessionUser(user);</span>
-<span class="cstat-no" title="statement not covered" >        await user.save();</span>
-<span class="cstat-no" title="statement not covered" >        res.send(session);</span>
+      try {
+        const user = await User.create({ username, password });
+        const session = setSessionUser(user);
+        await user.save();
+        res.send(session);
       } catch (err) {
-<span class="cstat-no" title="statement not covered" >        res.status(401).json({ error: "Username not available" });</span>
+        console.log(err);
+        res.status(401).json({ error: "Username not available" });
       }
     }
   }
@@ -265,7 +265,7 @@ export default LoginController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-13T02:49:37.968Z
+                at 2024-04-13T04:14:54.784Z
             </div>
         <script src="../prettify.js"></script>
         <script>

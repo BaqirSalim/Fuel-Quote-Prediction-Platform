@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712976578010" clover="3.2.0">
-  <project timestamp="1712976578010" name="All files">
-    <metrics statements="56" coveredstatements="37" conditionals="28" coveredconditionals="20" methods="10" coveredmethods="5" elements="94" coveredelements="62" complexity="0" loc="56" ncloc="56" packages="4" files="8" classes="8"/>
+<coverage generated="1712981694847" clover="3.2.0">
+  <project timestamp="1712981694847" name="All files">
+    <metrics statements="56" coveredstatements="53" conditionals="28" coveredconditionals="26" methods="10" coveredmethods="8" elements="94" coveredelements="87" complexity="0" loc="56" ncloc="56" packages="4" files="8" classes="8"/>
     <package name="controllers">
-      <metrics statements="39" coveredstatements="25" conditionals="26" coveredconditionals="20" methods="5" coveredmethods="4"/>
+      <metrics statements="39" coveredstatements="39" conditionals="26" coveredconditionals="26" methods="5" coveredmethods="5"/>
       <file name="client-profile.controller.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\controllers\client-profile.controller.js">
-        <metrics statements="8" coveredstatements="6" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
-        <line num="9" count="2" type="cond" truecount="8" falsecount="0"/>
+        <metrics statements="8" coveredstatements="8" conditionals="8" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="9" count="3" type="cond" truecount="8" falsecount="0"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
       <file name="fuel-quote.controller.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\controllers\fuel-quote.controller.js">
         <metrics statements="13" coveredstatements="13" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
@@ -32,25 +32,25 @@
         <line num="29" count="1" type="stmt"/>
       </file>
       <file name="login.controller.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\controllers\login.controller.js">
-        <metrics statements="18" coveredstatements="6" conditionals="12" coveredconditionals="6" methods="2" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="1" type="cond" truecount="3" falsecount="1"/>
+        <metrics statements="18" coveredstatements="18" conditionals="12" coveredconditionals="12" methods="2" coveredmethods="2"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="2" type="cond" truecount="4" falsecount="0"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
       </file>
     </package>
     <package name="data">
@@ -61,7 +61,7 @@
       </file>
     </package>
     <package name="models">
-      <metrics statements="14" coveredstatements="9" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="14" coveredstatements="11" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
       <file name="client-profile.model.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\models\client-profile.model.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
@@ -73,17 +73,17 @@
         <line num="22" count="1" type="stmt"/>
       </file>
       <file name="user.model.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\models\user.model.js">
-        <metrics statements="10" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
+        <metrics statements="10" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <line num="6" count="2" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
         <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
       </file>
     </package>
     <package name="util">
@@ -91,7 +91,7 @@
       <file name="helper.js" path="C:\Users\shado\COSC_4353_Project\COSC-4353-Project\backend\util\helper.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
       </file>
     </package>
   </project>
