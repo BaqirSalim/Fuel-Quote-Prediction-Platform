@@ -1,4 +1,5 @@
 
+// fuel-quote.model.js
 import mongoose from 'mongoose';
 
 const fuelQuoteSchema = new mongoose.Schema({
@@ -18,15 +19,11 @@ const fuelQuoteSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    
 }, { timestamps: true });
 
-// model for the fuel quote
-const FuelQuoteModel = mongoose.model('FuelQuote', fuelQuoteSchema);
+const FuelQuote = mongoose.model('FuelQuote', fuelQuoteSchema);
 
-
-export default FuelQuoteModel;
-
+export default FuelQuote;
 
 
 
