@@ -1,4 +1,5 @@
 import FuelQuote from '../models/fuel-quote.model.js';
+import username from '../models/client-profile.model';
 
 class FuelQuoteController {
     static async submitFuelQuote(req, res) {
@@ -21,7 +22,7 @@ class FuelQuoteController {
 
     static async getFuelQuoteHistory(req, res) {
         try {
-            const fuelQuoteHistory = await FuelQuote.find();
+            const fuelQuoteHistory = await FuelQuote.find({ username: username });
 
             res.status(200).json({ fuelQuoteHistory });
         } catch (error) {
