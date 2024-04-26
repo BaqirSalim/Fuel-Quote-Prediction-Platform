@@ -43,7 +43,8 @@ export default function FuelForm() {
     if (gallonsRequested === 0) {
       setError("You have not requested any gallons of fuel");
     } else {
-      const order = {
+        const order = {
+        username: user.username,
         gallonsRequested: gallonsRequested,
         deliveryAddress: deliveryAddress,
         deliveryDate: deliveryDate,

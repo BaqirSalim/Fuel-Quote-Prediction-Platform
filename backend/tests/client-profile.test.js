@@ -8,7 +8,7 @@ describe("clientProfile", () => {
   // Mock the Profile and User models' findOne and save methods
   const mockProfileFindOne = jest.spyOn(ClientProfile, "findOne");
   const mockUserFindOne = jest.spyOn(User, "findOne");
-  const mockProfileSave = jest.spyOn(ClientProfile.prototype, "save");
+  const mockProfileSave = jest.spyOn(ClientProfile, "save");
 
   // Test case for successful profile update
   test("should return a 200 status code and the updated client profile data", async () => {
@@ -48,7 +48,7 @@ describe("clientProfile", () => {
     mockProfileFindOne.mockResolvedValue(mockClientProfile);
 
     // Call the controller method
-    await ClientController.clientProfile(req, res);
+    await ClientController.updateClientProfile(req, res);
 
     // Assertions
     expect(res.status).toBeCalledWith(200);
@@ -67,7 +67,7 @@ describe("clientProfile", () => {
     };
 
     // Call the controller method
-    await ClientController.clientProfile(req, res);
+    await ClientController.updateClientProfile(req, res);
 
     // Assertions
     expect(res.status).toBeCalledWith(400);
@@ -98,7 +98,7 @@ describe("clientProfile", () => {
     mockUserFindOne.mockResolvedValue(null);
 
     // Call the controller method
-    await ClientController.clientProfile(req, res);
+    await ClientController.updateClientProfile(req, res);
 
     // Assertions
     expect(res.status).toBeCalledWith(404);
@@ -131,7 +131,7 @@ describe("clientProfile", () => {
     mockUserFindOne.mockResolvedValue(mockUser);
 
     // Call the controller method
-    await ClientController.clientProfile(req, res);
+    await ClientController.updateClientProfile(req, res);
 
     // Assertions
     expect(res.status).toBeCalledWith(404);
