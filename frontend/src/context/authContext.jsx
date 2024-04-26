@@ -14,94 +14,91 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-
 const AuthContext = createContext();
 
-export function AuthProvider({children}) {
-    const [currentUser, setCurrentUser] = useState(() => {
-        const prevData = localStorage.getItem('currentUser');
-        return prevData ? JSON.parse(prevData) : null;
-    });
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState(() => {
+    const prevData = localStorage.getItem("currentUser");
+    return prevData ? JSON.parse(prevData) : null;
+  });
 
-    useEffect(() => {
-        if(currentUser != null)
-        {
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        }
-      }, [currentUser]);
-
-    const register = async (user, password) => {
-        try {
-            const response = await axios.post('http://localhost:3000/user/register', {username:user, password});           
-            
-            const {userId, username} = response.data;
-            setCurrentUser({userId, username})
-
-            if(response.status === 200)
-            {
-                return {success: true, message: "Registration successful"}
-            }
-        } catch (error) {
-            if(error.response.status === 402)
-            {
-                return {success: false, error: "Username or Password not long enough"}
-            }
-            else if(error.response.status === 401)
-            {
-                return {success: false, error: "Username not available"}
-            }
-            else
-            {
-                console.log(error.message)
-                return {success: false, error: "An unexpected error occurred"}
-            }
-        }
+  useEffect(() => {
+    if (currentUser != null) {
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
     }
+  }, [currentUser]);
 
-    const login = async (user, password) => {
-        try {
-            const response = await axios.post('http://localhost:3000/user/login', {username:user, password});           
-            
-            const {userId, username} = response.data;
-            setCurrentUser({userId, username})
+  const register = async (user, password) => {
+    try {
+      const response = await axios.post("http://localhost:3000/user/register", {
+        username: user,
+        password,
+      });
 
-            if(response.status === 200)
-            {
-                console.log(userId)
-                return {success: true, message: "Login successful"}
-            }
-        } catch (error) {
-            if(error.response.status === 401)
-            {
-                return {success: false, error: "Username or Password incorrect"}
-            }
-            else if(error.response.status === 402)
-            {
-                return {success: false, error: "Username or Password empty"}
-            }
-            else
-            {
-                console.log(error.message)
-                return {success: false, error: "Unexpected error occurred"}
-            }
-        }
+      const { userId, username } = response.data;
+      setCurrentUser({ userId, username });
+
+      if (response.status === 200) {
+        return { success: true, message: "Registration successful" };
+      }
+    } catch (error) {
+      if (error.response.status === 402) {
+        return {
+          success: false,
+          error: "Username or Password not long enough",
+        };
+      } else if (error.response.status === 401) {
+        return { success: false, error: "Username not available" };
+      } else {
+        console.log(error.message);
+        return { success: false, error: "An unexpected error occurred" };
+      }
     }
+  };
 
-    const logout = async () => {
-        setCurrentUser(null)
+  const login = async (user, password) => {
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", {
+        username: user,
+        password,
+      });
 
-        await axios.delete('http://localhost:3000/user/delete')
+      const { userId, username } = response.data;
+      setCurrentUser({ userId, username });
+
+      if (response.status === 200) {
+        console.log(userId);
+        return { success: true, message: "Login successful" };
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        return { success: false, error: "Username or Password incorrect" };
+      } else if (error.response.status === 402) {
+        return { success: false, error: "Username or Password empty" };
+      } else {
+        console.log(error.message);
+        return { success: false, error: "Unexpected error occurred" };
+      }
     }
+  };
 
-    const getUser = () => {
-        return currentUser;
-    }
+  const logout = async () => {
+    setCurrentUser(null);
 
-    return (
-        <AuthContext.Provider value={{currentUser, login, logout, register, getUser}}>
-            {children}
-        </AuthContext.Provider>
-    );
+    await axios.delete("http://localhost:3000/user/delete");
+  };
+
+  const getUser = () => {
+    return currentUser;
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ currentUser, login, logout, register, getUser }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export const useAuth = () => useContext(AuthContext);

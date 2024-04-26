@@ -1,72 +1,97 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+html,
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to top, #6E48AA, #FF6B6B);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  height: 100%;
 }
 
-h2{
-    color: transparent; /* Make the text transparent */
-    text-shadow: 0 0 0px #6E48AA, 0 0 0px #FF6B6B; /* Apply text-shadow with gradient effect */
+img {
+  width: 800px;
+  height: 737px;
+  object-fit: cover;
+  image-rendering: crisp-edges;
 }
 
-.container {
-    text-align: center;
-    color: #fff;
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  overflow: hidden;
 }
 
 .box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 10%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  margin: auto;
 }
 
-.textbox {
-    margin-bottom: 20px;
-    text-align: left;
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.textbox input {
-    width: calc(100% - 3px);
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+.text h2 {
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.loginButton {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #6E48AA;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.text form {
+  max-width: 400px;
+  width: 100%;
 }
 
-.loginButton:hover {
-    background-color: #5b3e8c;
+.text .textbox {
+  margin-bottom: 15px;
+}
+
+.text input[type="text"],
+.text input[type="password"],
+.text input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.text input[type="text"]:focus,
+.text input[type="password"]:focus {
+  border-color: #6e48aa;
+}
+
+.text input[type="submit"] {
+  background-color: #6e48aa;
+  color: #fff;
+  cursor: pointer;
+}
+
+.text input[type="submit"]:hover {
+  background-color: #5b3e8c;
 }
 
 .registerText {
-    font-size: 14px;
-    color: #999;
+  font-size: 14px;
+  color: #999;
+  margin-top: 10px;
 }
 
 .registerText a {
-    color: #6E48AA;
-    text-decoration: none;
+  color: #6e48aa;
+  text-decoration: none;
 }
 
 .registerText a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

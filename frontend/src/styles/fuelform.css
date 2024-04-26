@@ -1,0 +1,45 @@
+.fuel-quote-container {
+  width: 600px;
+  padding: 20px;
+  background-color: #f55778;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto; /* Center the form horizontally */
+}
+
+.fuel-quote-container h2 {
+  margin-bottom: 20px;
+}
+
+.fuel-quote-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.fuel-quote-container input[type="number"],
+.fuel-quote-container input[type="date"],
+.fuel-quote-container input[type="text"] {
+  width: calc(100% - 10px); /* Adjust input width */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.fuel-quote-container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #6e48aa;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fuel-quote-container button[type="submit"]:hover {
+  background-color: #4c3680;
+}
+
+.fuel-quote-container p {
+  color: red;
+}
