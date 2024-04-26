@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.06% </span>
+                <span class="strong">87.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/31</span>
+                <span class='fraction'>27/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">58.06% </span>
+                <span class="strong">87.09% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/31</span>
+                <span class='fraction'>27/31</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -186,22 +186,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -260,23 +260,23 @@ class ClientController {
     };
 &nbsp;
     // function to get client's profile data
-<span class="fstat-no" title="function not covered" >    st</span>atic async getClientProfile(req, res) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-          const { username } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+    static async getClientProfile(req, res) {
+        try {
+          const { username } = req.params;
     
           // Find the client profile by username
             
-            const user = <span class="cstat-no" title="statement not covered" >await User.findOne({ username });</span>
-<span class="cstat-no" title="statement not covered" >            if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(404).json({ error: "User not found" });</span>
+            const user = await User.findOne({ username });
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
             }
-          const clientProfile = <span class="cstat-no" title="statement not covered" >await ClientProfile.findOne({ _id: user.clientProfile });</span>
+          const clientProfile = await ClientProfile.findOne({ _id: user.clientProfile });
     
-<span class="cstat-no" title="statement not covered" >          if (!clientProfile) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ error: "Client profile not found" });</span>
+          if (!clientProfile) {
+            return res.status(404).json({ error: "Client profile not found" });
           }
     
-<span class="cstat-no" title="statement not covered" >          res.status(200).json({ clientProfile });</span>
+          res.status(200).json({ clientProfile });
         } catch (error) {
 <span class="cstat-no" title="statement not covered" >          console.error("Error fetching client profile:", error);</span>
 <span class="cstat-no" title="statement not covered" >          res.status(500).json({ error: "Internal Server Error" });</span>
@@ -295,7 +295,7 @@ export default ClientController;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-26T22:32:05.100Z
+                at 2024-04-26T23:35:22.165Z
             </div>
         <script src="../prettify.js"></script>
         <script>

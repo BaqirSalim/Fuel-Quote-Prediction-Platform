@@ -62,6 +62,95 @@ describe("submitFuelQuote", () => {
     expect(res.json).toBeCalledWith({ fuelquote: mockFuelQuote });
   });
 
+  test("should return a 404 user", async () => {
+    const req = {
+      body: {
+        username: "baqir",
+        gallonsRequested: 100,
+        deliveryAddress: "123 Main St",
+        deliveryDate: "07/24/2024",
+        suggestedPrice: 50,
+        totalAmountDue: 100,
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockFuelQuote = {
+      _id: "1234567890",
+      gallonsRequested: 100,
+      deliveryAddress: "123 Main St",
+      deliveryDate: "07/24/2024",
+      suggestedPrice: 50,
+      totalAmountDue: 100,
+    };
+
+    const mockUser = {
+      _id: "1234567890",
+      clientProfile: "0987654321", // Sample clientProfile ID associated with the user
+    };
+    mockUserFindOne.mockResolvedValue(null);
+
+    await FuelQuoteController.submitFuelQuote(req, res);
+
+    expect(res.status).toBeCalledWith(404);
+    expect(res.json).toBeCalledWith({ error: "User not found" });
+  });
+
+  test("should return a 404 client profile", async () => {
+    const req = {
+      body: {
+        username: "baqir",
+        gallonsRequested: 100,
+        deliveryAddress: "123 Main St",
+        deliveryDate: "07/24/2024",
+        suggestedPrice: 50,
+        totalAmountDue: 100,
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    const mockFuelQuote = {
+      _id: "1234567890",
+      gallonsRequested: 100,
+      deliveryAddress: "123 Main St",
+      deliveryDate: "07/24/2024",
+      suggestedPrice: 50,
+      totalAmountDue: 100,
+    };
+
+    const mockUser = {
+      _id: "1234567890",
+      clientProfile: "0987654321", // Sample clientProfile ID associated with the user
+    };
+    mockUserFindOne.mockResolvedValue(mockUser);
+
+    mockCreate.mockResolvedValue(mockFuelQuote);
+
+    const mockClientProfile = {
+      _id: "0987654321",
+      fullName: "Old Name",
+      address1: "Old Address",
+      address2: "Old Address 2",
+      city: "Old City",
+      state: "Old State",
+      zipcode: "Old Zipcode",
+      orders: [],
+      save: jest.fn(),
+    };
+    mockProfileFindOne.mockResolvedValue(null);
+
+    await FuelQuoteController.submitFuelQuote(req, res);
+
+    expect(res.status).toBeCalledWith(404);
+    expect(res.json).toBeCalledWith({ error: "ClientProfile not found" });
+  });
+
   test("should return a 400 status code for missing parameters", async () => {
     const req = {
       body: {}, // Missing parameters
@@ -204,6 +293,21 @@ describe("getFuelQuoteHistory", () => {
 
     expect(res.status).toBeCalledWith(200);
     expect(res.json).toBeCalledWith({ fuelQuoteHistory: mockFuelQuoteHistory });
+  });
+
+  test("should return a 404 user", async () => {
+    const req = { query: { username: "baqir" } };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    mockUserFindOne.mockResolvedValue(null);
+
+    await FuelQuoteController.getFuelQuoteHistory(req, res);
+
+    expect(res.status).toBeCalledWith(404);
+    expect(res.json).toBeCalledWith({ error: "User not found" });
   });
 
   test("should return a 500 status code and error message if there is an internal server error", async () => {

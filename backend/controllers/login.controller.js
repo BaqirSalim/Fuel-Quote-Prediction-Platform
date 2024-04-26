@@ -51,7 +51,7 @@ class LoginController {
         const session = setSessionUser(user);
         res.send(session);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(401).json({ error: "Username not available" });
       }
     }
