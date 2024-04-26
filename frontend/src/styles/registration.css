@@ -1,64 +1,61 @@
-.profile-container {
+body {
+  background-image: url("https://fastly.picsum.photos/id/242/1891/1280.jpg?hmac=EhMqQfJIQi3yk8-7sjY4pdtCJyONM1X0bYXEhhALwJY");
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+}
+
+.registration-container {
   background-color: #fff; /* White background */
-  min-height: 500px; /* Set the minimum height of the container */
+  padding: 20px; /* Add padding for spacing */
   border-radius: 8px; /* Add border-radius for rounded corners */
   box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* Add box shadow for depth */
   width: 400px; /* Set maximum width */
+  margin: auto; /* Center the box horizontally */
   text-align: center; /* Center text content horizontally */
   position: absolute; /* Position the box */
-  top: 45%; /* Move the box down by 50% of the viewport height */
+  top: 50%; /* Move the box down by 50% of the viewport height */
   left: 50%; /* Move the box right by 50% of the viewport width */
-  transform: translate(-50%, -50%);
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Center the box both horizontally and vertically */
 }
 
-.profile-container h2 {
-  margin-bottom: 20px; /* Add margin below heading */
-}
-
-.profile-container form {
+.registration-container form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center form items horizontally */
+  align-items: left; /* Center form items horizontally */
 }
 
-.profile-container .input-container {
-  margin-bottom: 10px; /* Add margin bottom for spacing between input fields */
+.registration-container .username-input {
+  margin-top: 20px; /* Add margin-top to create space between Sign Up and username input */
 }
 
-.profile-container input[type="text"],
-.profile-container input[type="password"],
-.profile-container select {
-  width: 300px; /* Adjust input width */
+.registration-container input[type="text"],
+.registration-container input[type="password"] {
   padding: 10px; /* Add padding for spacing */
   border: 1px solid #ccc; /* Add a border with a light gray color */
   border-radius: 5px; /* Add a border radius */
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Add a shadow */
   transition: box-shadow 0.3s ease; /* Add a transition for smoothness */
-  margin-top: 5px; /* Adjust margin top */
 }
 
-.profile-container input[type="text"]:focus,
-.profile-container input[type="password"]:focus,
-.profile-container select:focus {
+.registration-container input[type="text"]:focus,
+.registration-container input[type="password"]:focus {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Change the shadow on focus */
 }
 
-.profile-container select option[disabled] {
-  color: gray; /* Change the color of the placeholder option */
-}
-
-.profile-container button {
-  width: calc(100% - 40px); /* Adjust button width */
-  margin-top: 20px; /* Add margin top for spacing */
-  padding: 10px; /* Add padding for spacing */
+button {
   background-color: #6e48aa; /* Change the background color to purple */
   color: white; /* Change the text color to white */
   border: none; /* Remove the border */
+  padding: 10px 20px; /* Add padding for spacing */
   border-radius: 5px; /* Add border-radius for rounded corners */
   cursor: pointer; /* Add pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Add transition for smoothness */
 }
 
-.profile-container button:hover {
+button:hover {
   background-color: #4c3680; /* Change the background color on hover */
 }

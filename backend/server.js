@@ -8,6 +8,7 @@ import MongoStore from "connect-mongo";
 import clientRoutes from "./routes/client-profile.routes.js";
 import loginRoutes from "./routes/login.routes.js";
 import fuelRoutes from "./routes/fuel-quote.routes.js";
+import pricingRoutes from "./routes/pricing.routes.js";
 
 const app = express();
 const port = 3000;
@@ -56,3 +57,4 @@ app.use(
 app.use("/client", clientRoutes);
 app.use("/user", loginRoutes);
 app.use("/fuelquote", fuelRoutes);
+app.use("/pricing", pricingRoutes);

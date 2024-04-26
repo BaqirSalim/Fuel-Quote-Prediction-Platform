@@ -35,11 +35,10 @@ export default function ProfileForm() {
           zipcode: zipcode,
           orders: [], // THIS WILL PROBABLY RESET ORDERS TO BE EMPTY ARRAY, ADD FUNCTIONALITY TO ONLY UPDATE ORDERS???
         };
-        
+
         try {
-          
           await updateProfile(data);
-          console.log("sent to update profile")
+          console.log("sent to update profile");
           navigate("/profile_page");
         } catch (error) {
           setError("Failed to update profile. Please try again.");
@@ -49,82 +48,61 @@ export default function ProfileForm() {
       }
     }
   };
-  
 
   return (
-    <div className="profile-container">
+    <section className="profile-container">
       <h2>Client Profile Form</h2>
       <form onSubmit={handleUpdate}>
-        <div className="input-container">
-          <label htmlFor="full_name">
-            <strong>Full Name</strong>
-          </label>
-          <br />
+        <section className="input-container">
           <input
             type="text"
             id="full_name"
             name="full_name"
-            placeholder="Enter Full Name"
+            placeholder="Full Name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             maxLength={50}
             required
           />
-        </div>
-        <div className="input-container">
-          <label htmlFor="address1">
-            <strong>Address 1</strong>
-          </label>
-          <br />
+        </section>
+        <section className="input-container">
           <input
             type="text"
             id="address1"
             name="address1"
-            placeholder="Enter Address 1"
+            placeholder="Address 1"
             value={address1}
             onChange={(e) => setAddress1(e.target.value)}
             minLength={10}
             maxLength={100}
             required
           />
-        </div>
-        <div className="input-container">
-          <label htmlFor="address2">
-            <strong>Address 2 (Optional)</strong>
-          </label>
-          <br />
+        </section>
+        <section className="input-container">
           <input
             type="text"
             id="address2"
             name="address2"
-            placeholder="Enter Address 2"
+            placeholder="Address 2 (Optional)"
             value={address2}
             onChange={(e) => setAddress2(e.target.value)}
             minLength={10}
             maxLength={100}
           />
-        </div>
-        <div className="input-container">
-          <label htmlFor="city">
-            <strong>City</strong>
-          </label>
-          <br />
+        </section>
+        <section className="input-container">
           <input
             type="text"
             id="city"
             name="city"
-            placeholder="Enter City"
+            placeholder="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             maxLength={100}
             required
           />
-        </div>
-        <div className="input-container">
-          <label htmlFor="state">
-            <strong>State</strong>
-          </label>
-          <br />
+        </section>
+        <section className="input-container">
           <select
             id="state"
             name="state"
@@ -132,7 +110,9 @@ export default function ProfileForm() {
             onChange={(e) => setState(e.target.value)}
             required
           >
-            <option value="">Select State</option>
+            <option value="" disabled selected>
+              State
+            </option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -184,26 +164,22 @@ export default function ProfileForm() {
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
           </select>
-        </div>
-        <div className="input-container">
-          <label htmlFor="zipcode">
-            <strong>Zipcode</strong>
-          </label>
-          <br />
+        </section>
+        <section className="input-container">
           <input
             type="text"
             id="zipcode"
             name="zipcode"
-            placeholder="Enter Zipcode"
+            placeholder="Zipcode"
             value={zipcode}
             onChange={(e) => setZipcode(e.target.value)}
             minLength={5}
             maxLength={9}
             required
           />
-        </div>
+        </section>
         <button className="update-button">Update Profile</button>
       </form>
-    </div>
+    </section>
   );
 }

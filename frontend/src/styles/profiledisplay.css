@@ -1,28 +1,46 @@
-.profile-container {
-    max-width: 600px;
-    height: 380px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+body {
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  height: 100%; /* Make sure the container covers the full viewport height */
+  margin: 0; /* Remove default margin */
 }
 
-.profile-container h2 {
-    margin-bottom: 20px;
+.profile-display-container {
+  width: 600px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(3, 3, 3, 3);
+  text-align: center; /* Center the content horizontally */
 }
 
-.profile-container p {
-    margin-bottom: 10px;
+.profile-details {
+  background-color: #fff;
+  border-radius: 8px; /* Add border-radius for curved corners */
+  margin-bottom: 20px; /* Add space between profile details and buttons */
 }
 
-.profile-container button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #6E48AA;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.profile-details p {
+  background-color: #f489f4; /* Change the background color of <p> elements */
+}
+
+.profile-display-container button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #6e48aa;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 5px; /* Add margin-right to create space between buttons */
+}
+
+.profile-display-container button:last-child {
+  margin-right: 0; /* Remove margin-right from the last button */
+}
+
+.profile-display-container button:hover {
+  background-color: #4c3680;
 }
