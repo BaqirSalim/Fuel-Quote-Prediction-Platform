@@ -29,8 +29,8 @@ class LoginController {
         // create a new user
         const user = await User.create({ username, password });
 
-        console.log(user._id);
-        
+        // console.log(user._id);
+
         // create a blank ClientProfile associated with the new user
         const clientProfile = await ClientProfile.create({
           user: user._id,

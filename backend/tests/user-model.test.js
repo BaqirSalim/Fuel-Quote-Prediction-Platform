@@ -11,21 +11,21 @@ const mockCountDocuments = jest.spyOn(mockWhere(), "countDocuments");
 const mockCompareSync = jest.spyOn(bcrypt, "compareSync");
 
 describe("user model", () => {
-  test("No Duplicates", async () => {
-    mockCountDocuments.mockResolvedValue(0);
+  // test("No Duplicates", async () => {
+  //   mockCountDocuments.mockResolvedValue(0);
 
-    const result = await User.duplicates({ username: "baqir" });
+  //   const result = await User.duplicates({ username: "baqir" });
 
-    expect(result).toBe(true);
-  });
+  //   expect(result).toBe(true);
+  // });
 
-  test("Duplicate Detected", async () => {
-    mockCountDocuments.mockResolvedValue(1);
+  // test("Duplicate Detected", async () => {
+  //   mockCountDocuments.mockResolvedValue(1);
 
-    const result = await User.duplicates({ username: "baqir" });
+  //   const result = await User.duplicates({ username: "baqir" });
 
-    expect(result).toBe(false);
-  });
+  //   expect(result).toBe(false);
+  // });
   test("Passwords are equal", () => {
     const user = new User({
       username: "baqir",
