@@ -9,15 +9,11 @@ class FuelQuoteController {
         deliveryAddress,
         deliveryDate,
         suggestedPrice,
+        totalAmountDue,
       } = req.body;
 
       // Validate parameters
-      if (
-        !gallonsRequested ||
-        !deliveryAddress ||
-        !deliveryDate ||
-        !suggestedPrice
-      ) {
+      if (!gallonsRequested || !deliveryAddress || !deliveryDate) {
         return res.status(400).json({ error: "All fields are required" });
       }
 

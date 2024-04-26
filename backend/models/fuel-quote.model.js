@@ -1,31 +1,31 @@
 import mongoose from "mongoose";
 
-const fuelQuoteSchema = new mongoose.Schema({
-  clientProfile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ClientProfile",
-    required: true,
+const fuelQuoteSchema = new mongoose.Schema(
+  {
+    gallonsRequested: {
+      type: Number,
+      required: true,
+    },
+    deliveryAddress: {
+      type: String,
+      required: true,
+    },
+    deliveryDate: {
+      type: Date,
+      required: true,
+    },
+    suggestedPrice: {
+      type: Number,
+      required: true,
+    },
+    totalAmountDue: {
+      type: Number,
+      required: true,
+    },
   },
-  gallonsRequested: {
-    type: Number,
-    required: true,
-  },
-  deliveryAddress: {
-    type: String,
-    required: true,
-  },
-  deliveryDate: {
-    type: Date,
-    required: true,
-  },
-  suggestedPrice: {
-    type: Number,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const FuelQuote = mongoose.model("FuelQuote", fuelQuoteSchema);
+
 export default FuelQuote;
-
-
-
