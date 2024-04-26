@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const fuelQuoteSchema = new mongoose.Schema(
   {
+    clientProfile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ClientProfile",
+      required: true,
+    },
     gallonsRequested: {
       type: Number,
       required: true,
