@@ -12,7 +12,7 @@ const useClientForm = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data) // Send `data` directly as the request body
             });
-
+            
             const response = await res.json();
 
             if (res.ok) {

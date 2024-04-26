@@ -32,8 +32,7 @@ export default function ProfileForm() {
           address2: address2,
           city: city,
           state: state,
-          zipcode: zipcode,
-          orders: [], // THIS WILL PROBABLY RESET ORDERS TO BE EMPTY ARRAY, ADD FUNCTIONALITY TO ONLY UPDATE ORDERS???
+          zipcode: zipcode
         };
 
         try {
@@ -110,7 +109,7 @@ export default function ProfileForm() {
             onChange={(e) => setState(e.target.value)}
             required
           >
-            <option value="" disabled selected>
+            <option value="">
               State
             </option>
             <option value="AL">Alabama</option>

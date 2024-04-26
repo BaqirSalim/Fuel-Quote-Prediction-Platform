@@ -35,7 +35,7 @@ class LoginController {
         const clientProfile = await ClientProfile.create({
           user: user._id,
           fullName: "placeholder-name",
-          address1: "placeholder-address",
+          address1: "placeholder-address", // make some properties empty to allow frontend to check for profile data
           address2: "",
           city: "placeholder-city",
           state: "XX",
