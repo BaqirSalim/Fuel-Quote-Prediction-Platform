@@ -3,6 +3,6 @@ import PricingController from "../controllers/pricing.controller.js";
 
 const router = express.Router();
 
-router.get("/getPrice", PricingController.generateSuggestedPrice);
+router.post("/getprice", PricingController.generateSuggestedPrice);
 
 export default router;

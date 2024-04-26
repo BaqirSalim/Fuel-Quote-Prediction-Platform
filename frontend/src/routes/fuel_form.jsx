@@ -9,27 +9,27 @@ export default function FuelForm() {
   const { getUser, updateOrders } = useAuth();
   const user = getUser();
   const [gallonsRequested, setGallonsRequested] = useState(0);
-  const [deliveryAddress, setDeliveryAddress] = useState(user["address1"]);
+  const [deliveryAddress, setDeliveryAddress] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
-  const [suggestedPrice, setSuggestedPrice] = useState(50);
+  const [suggestedPrice, setSuggestedPrice] = useState(0);
   const [totalAmountDue, setTotalAmountDue] = useState(0);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { getProfile } = getClientData();
 
-  useEffect(() => {
-    setTotalAmountDue(gallonsRequested * suggestedPrice);
-  }, [gallonsRequested, suggestedPrice]);
+  useEffect(() => {}, []);
 
   const handleGetQuote = async () => {
     try {
-      //const userdata = await getProfile(user.username);
-
-      const response = await axios.post("/backend/routes/pricing/getPrice", {
-        location: "TX",
-        recurringClient: false, // Assuming no information available for recurring client
-        gallonsRequested: gallonsRequested,
-      });
+      const userData = await getProfile(user.username);
+      const response = await axios.post(
+        "http://localhost:3000/pricing/getprice",
+        {
+          location: userData.clientProfile.state,
+          recurringClient: false, // Assuming no information available for recurring client
+          gallonsRequested: gallonsRequested,
+        }
+      );
       setSuggestedPrice(response.data.suggestedPrice);
       setTotalAmountDue(response.data.totalAmount);
     } catch (error) {
@@ -73,7 +73,7 @@ export default function FuelForm() {
           type="text"
           id="delivery-address"
           value={deliveryAddress}
-          readOnly
+          onChange={(e) => setDeliveryAddress(e.target.value)}
         />
         <br />
         <label htmlFor="delivery-date">Delivery Date:</label>
@@ -84,27 +84,19 @@ export default function FuelForm() {
           onChange={(e) => setDeliveryDate(e.target.value)}
         />
         <br />
-        <label htmlFor="suggested-price">Suggested Price:</label>
-        <input
-          type="number"
-          id="suggested-price"
-          value={suggestedPrice}
-          readOnly
-        />
-        <br />
-        <label htmlFor="total-amount-due">Total Amount Due:</label>
-        <input
-          type="number"
-          id="total-amount-due"
-          value={totalAmountDue}
-          readOnly
-        />
-        <br />
         <button type="button" onClick={handleGetQuote}>
           Get Quote
         </button>
         <button type="submit">Submit</button>
       </form>
+      <div>
+        {suggestedPrice !== 0 && (
+          <p>Suggested Price: ${suggestedPrice.toFixed(2)}</p>
+        )}
+        {totalAmountDue !== 0 && (
+          <p>Total Amount Due: ${totalAmountDue.toFixed(2)}</p>
+        )}
+      </div>
       <p>{error}</p>
     </div>
   );
