@@ -1,4 +1,4 @@
-import users from "../data/users.js";
+import ClientProfile from "../models/client-profile.model.js";
 import User from "../models/user.model.js";
 import { setSessionUser } from "../util/helper.js";
 
@@ -26,9 +26,29 @@ class LoginController {
       res.status(402).json({ error: "Username or Password is empty" });
     } else {
       try {
+        // create a new user
         const user = await User.create({ username, password });
-        const session = setSessionUser(user);
+
+        console.log(user._id);
+        
+        // create a blank ClientProfile associated with the new user
+        const clientProfile = await ClientProfile.create({
+          user: user._id,
+          fullName: "placeholder-name",
+          address1: "placeholder-address",
+          address2: "",
+          city: "placeholder-city",
+          state: "XX",
+          zipcode: "XXXXX",
+          orders: [],
+        });
+
+        // update the user's clientProfile field with the newly created clientProfile _id
+        user.clientProfile = clientProfile._id;
         await user.save();
+
+        // generate session token and send it back to the client
+        const session = setSessionUser(user);
         res.send(session);
       } catch (err) {
         console.log(err);

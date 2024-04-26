@@ -8,11 +8,16 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true, // ensures uniqueness of username (instead of using duplicates function)
+      unique: true,
     },
     password: {
       type: String,
       required: true,
+    },
+    // a reference to ClientProfile (one-to-one relationship)
+    clientProfile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ClientProfile",
     },
   },
   { timestamps: true }
@@ -24,12 +29,9 @@ UserSchema.pre("save", function () {
   }
 });
 
-UserSchema.statics.duplicates = async function (properties) {
-  return (await this.where(properties).countDocuments()) === 0;
-};
-
 UserSchema.methods.comparePasswords = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
+
 const User = mongoose.model("User", UserSchema);
 export default User;
