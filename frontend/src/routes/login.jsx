@@ -24,12 +24,12 @@ export default function Login() {
   };
 
   return (
-    <section class="wrapper">
-      <section class="box">
-        <section class="text">
+    <section className="wrapper">
+      <section className="box">
+        <section className="text">
           <h2>Welcome</h2>
           <form onSubmit={handleSubmit}>
-            <div class="textbox">
+            <div className="textbox">
               <input
                 type="text"
                 placeholder="Username"
@@ -37,7 +37,7 @@ export default function Login() {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div class="textbox">
+            <div className="textbox">
               <input
                 type="password"
                 placeholder="Password"
@@ -45,9 +45,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <input type="submit" class="loginButton" value="Login" />
+            <input type="submit" className="loginButton" value="Login" />
           </form>
-          <p class="registerText">
+          <p className="registerText">
             Don't have an account? <a href="/register">Register here</a>
           </p>
           <p>{error}</p>
