@@ -8,10 +8,7 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      validate: {
-        validator: (username) => User.duplicates({ username }),
-        message: "Username already exists",
-      },
+      unique: true, // ensures uniqueness of username (instead of using duplicates function)
     },
     password: {
       type: String,
