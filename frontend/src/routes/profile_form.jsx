@@ -23,7 +23,7 @@ export default function ProfileForm() {
     if (!fullName || !address1 || !city || !state || !zipcode) {
       setError("One or more profile fields are empty");
     } else {
-      const currentUser = getUser(); // Invoke getUser to get the current user
+      const currentUser = getUser(); // invoke getUser to get the current user
       if (currentUser) {
         const data = {
           username: currentUser.username,
