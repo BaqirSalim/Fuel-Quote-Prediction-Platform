@@ -1,34 +1,55 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
-import axios from 'axios';
-
+import getFuelHistory from "../hooks/getFuelHistory";
+import React from "react";
 
 export default function FuelHistory() {
-    const {getUser} = useAuth()
+  const { getUser } = useAuth();
+  const [fuelQuotes, setFuelQuotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const user = getUser();
+  const { fuelHistory } = getFuelHistory();
 
-    const user = getUser()
+  useEffect(() => {
+    const fetchFuelQuotes = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fuelHistory(user.username);
+        console.log("Fetched fuel quotes:", data);
+        setFuelQuotes(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Error fetching fuel history:", error);
+        setFuelQuotes([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    return (
-        <div>
-            <table>
-        <tr>
-          <th>Gallons Requested</th>
-          <th>Delivery Address</th>
-          <th>Delivery Date</th>
-          <th>Suggested Price</th>
-          <th>Total Amount Due</th>
-        </tr>
-        {user["orders"].map((order,i) => {
-            return(
-            <tr key={i}>
-                <td>{order["gallonsRequested"]}</td>
-                <td>{order["deliveryAddress"]}</td>
-                <td>{order["deliveryDate"]}</td>
-                <td>{order["suggestedPrice"]}</td>
-                <td>{order["totalAmountDue"]}</td>
-            </tr>
-            )
-        })}
-      </table>      
+    fetchFuelQuotes();
+  }, [user.username]);
+
+  return (
+    <div>
+      <h1>Fuel Quote History</h1>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : Array.isArray(fuelQuotes) && fuelQuotes.length === 0 ? (
+        <p>No fuel quotes found.</p>
+      ) : (
+        <ul>
+          {Array.isArray(fuelQuotes) &&
+            fuelQuotes.map((quote) => (
+              <li key={quote._id}>
+                <p>Gallons Requested: {quote.gallonsRequested}</p>
+                <p>Delivery Address: {quote.deliveryAddress}</p>
+                <p>Delivery Date: {quote.deliveryDate}</p>
+                <p>Suggested Price: {quote.suggestedPrice}</p>
+                <p>Total Amount Due: {quote.totalAmountDue}</p>
+                <p>Created At: {quote.createdAt}</p>
+              </li>
+            ))}
+        </ul>
+      )}
     </div>
-    );
+  );
 }

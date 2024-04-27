@@ -4,6 +4,7 @@ import { useAuth } from "../context/authContext";
 import axios from "axios";
 import "../styles/fuelform.css";
 import getClientData from "../hooks/getClientData";
+import useFuelQuote from "../hooks/useFuelQuote";
 
 export default function FuelForm() {
   const { getUser, updateOrders } = useAuth();
@@ -16,6 +17,7 @@ export default function FuelForm() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { getProfile } = getClientData();
+  const { submitFuelQuote } = useFuelQuote();
 
   useEffect(() => {}, []);
 
@@ -38,12 +40,12 @@ export default function FuelForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (gallonsRequested === 0) {
       setError("You have not requested any gallons of fuel");
     } else {
-        const order = {
+      const order = {
         username: user.username,
         gallonsRequested: gallonsRequested,
         deliveryAddress: deliveryAddress,
@@ -51,7 +53,14 @@ export default function FuelForm() {
         suggestedPrice: suggestedPrice,
         totalAmountDue: totalAmountDue,
       };
-      updateOrders(order);
+        
+        try {
+            await submitFuelQuote(order);
+            console.log("submitting fuel quote")
+        } catch (error) {
+            setError("Failed to submit fuel quote. Please try again.");
+        }
+      
       navigate("/fuel_history");
     }
   };
