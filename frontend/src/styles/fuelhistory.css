@@ -1,50 +1,19 @@
-/* styles.css */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-/* Dark mode table */
-.dark-theme-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #1e1e1e;
-    color: #fff;
-  }
-  
+th,
+td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
 
-  /* Table header */
-  .dark-theme-table th {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 2px solid #333;
-  }
-  
-  /* Table body */
-  .dark-theme-table td {
-    padding: 12px;
-    border-bottom: 1px solid #333;
-  }
-  
-  /* Table row hover effect */
-  .dark-theme-table tbody tr:hover {
-    background-color: #333;
-  }
-  
-  /* Clean design */
-  .dark-theme-table td {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  /* Set width for columns */
-  .dark-theme-table th:first-child,
-  .dark-theme-table td:first-child {
-    width: 30%;
-  }
-  
-  .dark-theme-table th:last-child,
-  .dark-theme-table td:last-child {
-    width: 70%;
-  }
-  
-  .table-cell {
-    color: black;
-  }
-  
+th {
+  background-color: #f2f2f2;
+}
+
+h1 {
+  text-align: center;
+}

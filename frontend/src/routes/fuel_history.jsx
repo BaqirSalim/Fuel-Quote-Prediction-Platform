@@ -29,20 +29,26 @@ export default function FuelHistory() {
         <thead>
           <tr>
             <th>Gallons Requested</th>
+            <th>Delivery Address</th>
+            <th>Delivery Date</th>
+            <th>Suggested Price</th>
             <th>Total Amount Due</th>
+            <th>Created At</th>
           </tr>
         </thead>
         <tbody>
           {fuelQuotes.map((quote) => (
             <tr key={quote._id}>
-              <td className="table-cell">{quote.gallonsRequested}</td>
-              <td className="table-cell">{quote.totalAmountDue}</td>
+              <td>{quote.gallonsRequested}</td>
+              <td>{quote.deliveryAddress}</td>
+              <td>{quote.deliveryDate}</td>
+              <td>${quote.suggestedPrice}</td>
+              <td>${quote.totalAmountDue}</td>
+              <td>{quote.createdAt}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-  
-  
 }
