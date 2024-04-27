@@ -29,8 +29,8 @@ class LoginController {
         // create a new user
         const user = await User.create({ username, password });
 
-        console.log(user._id);
-        
+        // console.log(user._id);
+
         // create a blank ClientProfile associated with the new user
         const clientProfile = await ClientProfile.create({
           user: user._id,
@@ -51,7 +51,7 @@ class LoginController {
         const session = setSessionUser(user);
         res.send(session);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         res.status(401).json({ error: "Username not available" });
       }
     }

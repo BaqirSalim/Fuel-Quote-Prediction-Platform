@@ -1,9 +1,11 @@
 import LoginController from "../controllers/login.controller";
 import User from "../models/user.model";
+import ClientProfile from "../models/client-profile.model";
 import { jest, test, expect, describe } from "@jest/globals";
 
 const mockFindOne = jest.spyOn(User, "findOne");
 const mockCreate = jest.spyOn(User, "create");
+const mockClientCreate = jest.spyOn(ClientProfile, "create");
 
 describe("login", () => {
   test("session is assigned at valid login", async () => {
@@ -90,7 +92,19 @@ describe("register", () => {
       save: jest.fn(),
     };
 
+    const clientMock = {
+      user: "1",
+      fullName: "placeholder-name",
+      address1: "placeholder-address",
+      address2: "",
+      city: "placeholder-city",
+      state: "XX",
+      zipcode: "XXXXX",
+      orders: [],
+    };
+
     mockCreate.mockResolvedValue(userMock);
+    mockClientCreate.mockResolvedValue(clientMock);
 
     await LoginController.register(req, res);
 
