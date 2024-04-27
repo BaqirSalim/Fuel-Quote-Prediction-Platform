@@ -8,18 +8,16 @@ export default function FuelHistory() {
     const user = getUser();
 
     const { fuelHistory } = getFuelHistory();
-
+    const fetchFuelQuotes = async () => {
+        try {
+            const data = await fuelHistory(user.username);
+            setFuelQuotes(data.fuelQuoteHistory);
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching fuel history:", error);
+        }
+    };
     useEffect(() => {
-        const fetchFuelQuotes = async () => {
-            try {
-                const data = await fuelHistory(user.username);
-                setFuelQuotes(data);
-                console.log(data);
-            } catch (error) {
-                console.error("Error fetching fuel history:", error);
-            }
-        };
-
         fetchFuelQuotes();
     }, [user.username]);
 
